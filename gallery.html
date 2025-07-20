@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nos Préstations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .carousel-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            flex-shrink: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        video,
+        img {
+            max-height: 80vh;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gray-100">
+    <a href="index.html"
+        class="absolute top-4 left-4 bg-white bg-opacity-80 text-black px-4 py-2 rounded shadow hover:bg-opacity-100 transition">
+        ⬅ Retour
+    </a>
+
+    <div class="carousel-container">
+        <div id="carousel-slides" class="carousel-track"></div>
+
+        <!-- Arrow Buttons -->
+        <button id="prev"
+            class="absolute top-1/2 left-0 transform -translate-y-1/2 px-3 py-2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-r-md">
+            &#8592;
+        </button>
+        <button id="next"
+            class="absolute top-1/2 right-0 transform -translate-y-1/2 px-3 py-2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-l-md">
+            &#8594;
+        </button>
+    </div>
+
+    <script>
+        const sets = {
+            1: [
+                "gallery/interieur/1.jpeg",
+                "gallery/interieur/2.mp4",
+                "gallery/interieur/3.jpeg",
+                "gallery/interieur/4.jpeg",
+                "gallery/interieur/5.jpeg",
+                "gallery/interieur/6.jpeg",
+                "gallery/interieur/7.jpeg",
+                "gallery/interieur/8.jpeg",
+                "gallery/interieur/9.jpeg",
+                "gallery/interieur/10.jpeg",
+                "gallery/interieur/11.jpeg",
+                "gallery/interieur/12.jpeg"
+            ],
+            2: [
+                "gallery/isolation/1.jpeg",
+                "gallery/isolation/2.jpeg",
+                "gallery/isolation/3.jpeg",
+                "gallery/isolation/4.jpeg",
+                "gallery/isolation/5.jpeg",
+                "gallery/isolation/6.jpeg",
+                "gallery/isolation/7.jpeg"
+            ],
+            3: [
+                "gallery/exterieur/1.jpeg",
+                "gallery/exterieur/2.jpeg",
+                "gallery/exterieur/3.jpeg",
+                "gallery/exterieur/4.jpeg",
+                "gallery/exterieur/5.jpeg",
+                "gallery/exterieur/6.jpeg",
+                "gallery/exterieur/7.jpeg"
+            ]
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const setNum = urlParams.get('set') || '1';
+        const mediaItems = sets[setNum] || sets[1];
+
+        const slides = document.getElementById('carousel-slides');
+        slides.innerHTML = mediaItems.map(src => {
+            const isVideo = src.toLowerCase().endsWith('.mp4');
+            return `
+        <div class="carousel-item">
+          ${isVideo
+                    ? `<video autoplay muted loop playsinline>
+                 <source src="${src}" type="video/mp4">
+                 Your browser does not support the video tag.
+               </video>`
+                    : `<img src="${src}" alt="media">`}
+        </div>`;
+        }).join('');
+
+        let index = 0;
+        const track = document.querySelector('.carousel-track');
+        function updateCarousel() {
+            track.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function nextSlide() {
+            index = (index + 1) % mediaItems.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            index = (index - 1 + mediaItems.length) % mediaItems.length;
+            updateCarousel();
+        }
+
+        document.getElementById('next').addEventListener('click', nextSlide);
+        document.getElementById('prev').addEventListener('click', prevSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Swipe support
+        let startX = 0;
+        slides.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        slides.addEventListener('touchend', (e) => {
+            const diff = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) {
+                diff > 0 ? nextSlide() : prevSlide();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

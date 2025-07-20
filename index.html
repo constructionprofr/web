@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConstructionPRO.fr</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .fade-up.appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+  <header class="bg-blue-300 p-4 sticky top-0 z-10 shadow">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:justify-between md:items-center">
+
+        <!-- Logo and Title -->
+        <div class="flex items-center space-x-3 mb-2 md:mb-0">
+          <a href="#home" class="flex items-center space-x-3">
+            <img src="gallery/common/logo.png" alt="Logo" class="h-10 w-auto" />
+            <h1 id="title" class="text-xl md:text-2xl font-bold whitespace-nowrap">
+              ConstructionPRO.fr
+            </h1>
+          </a>
+        </div>
+
+        <!-- Navigation and Language Selector -->
+        <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+
+          <!-- Nav Bar -->
+          <nav class="flex space-x-4 justify-start md:justify-end mb-2 md:mb-0">
+            <a href="#home" class="hover:underline" data-link="home">Accueil</a>
+            <a href="#services" class="hover:underline" data-link="services">Services</a>
+            <a href="#contact" class="hover:underline" data-link="contact">Contact</a>
+          </nav>
+
+          <!-- Language Bar -->
+          <div class="flex justify-end space-x-2">
+            <button onclick="setLang('en')" class="hover:underline">EN</button>
+            <button onclick="setLang('fr')" class="hover:underline">FR</button>
+            <button onclick="setLang('ru')" class="hover:underline">RU</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="home" class="bg-cover bg-center h-64"
+    style="background-image: url('https://source.unsplash.com/featured/?construction');">
+    <div class="h-full flex items-center justify-center text-center bg-black bg-opacity-50">
+      <h2 id="slogan" class="text-3xl text-white font-bold">Votre partenaire fiable en construction</h2>
+    </div>
+  </section>
+
+  <div class="bg-yellow-200 text-center py-2">
+    <div class="flex justify-center space-x-6 text-sm text-gray-800 font-medium">
+      <a href="https://www.tiktok.com/@construction_pro_fr" target="_blank" class="hover:underline">🎵 TikTok</a>
+      <a href="https://www.instagram.com/construction_pro_fr" target="_blank" class="hover:underline">📸 Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=100064447489505&sk=about" target="_blank"
+        class="hover:underline">📘 Facebook</a>
+    </div>
+  </div>
+
+  <section id="services" class="py-12">
+    <div class="container mx-auto text-center">
+      <h2 id="services-title" class="text-2xl font-bold mb-6">Nos Services</h2>
+      <a href="gallery.html?set=1">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded shadow fade-up">
+            <img src="gallery/common/electricity.webp" alt="Electricité"
+              class="mb-4 rounded shadow transition-transform transform hover:scale-105 duration-300" />
+            <h3 id="construction-title" class="font-semibold text-xl mb-2">Intérieurs</h3>
+            <p id="construction-desc">
+              Rénovation de cuisine, salle de bain et chambre : électricité, plomberie et finitions.
+            </p>
+          </div>
+      </a>
+      <a href="gallery.html?set=2">
+        <div class="bg-white p-6 rounded shadow fade-up">
+          <img src="gallery/common/insulation.webp" alt="Isolation"
+            class="mb-4 rounded shadow transition-transform transform hover:scale-105 duration-300" />
+          <h3 id="maintenance-title" class="font-semibold text-xl mb-2">Isolation</h3>
+          <p id="maintenance-desc">
+            Remplacement de fenêtres, isolation de toiture, solutions thermiques et phoniques.
+          </p>
+        </div>
+      </a>
+      <a href="gallery.html?set=3">
+        <div class="bg-white p-6 rounded shadow fade-up">
+          <img src="gallery/common/terrasse.webp" alt="Travaux extérieurs"
+            class="mb-4 rounded shadow transition-transform transform hover:scale-105 duration-300" />
+          <h3 id="groundworks-title" class="font-semibold text-xl mb-2">Travaux extérieurs</h3>
+          <p id="groundworks-desc">
+            Fondations, préparation du sol, terrasses et aménagements extérieurs.
+          </p>
+        </div>
+      </a>
+    </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-12">
+    <div class="container mx-auto max-w-lg">
+      <h2 id="contact-title" class="text-2xl font-bold mb-6 text-center">Contactez-nous</h2>
+      <form action="https://formspree.io/f/mwpqklnv" method="POST" class="bg-white p-6 rounded shadow">
+        <div class="mb-4">
+          <label id="label-name" class="block mb-2 font-semibold">Nom</label>
+          <input type="text" name="name" class="w-full border px-4 py-2 rounded" placeholder="Votre nom" required />
+        </div>
+        <div class="mb-4">
+          <label id="label-email" class="block mb-2 font-semibold">Courriel</label>
+          <input type="email" name="email" class="w-full border px-4 py-2 rounded" placeholder="vous@example.com"
+            required />
+        </div>
+        <div class="mb-4">
+          <label id="work-type" class="block mb-2 font-semibold">Type des travaux</label>
+          <select name="workType" class="w-full border px-4 py-2 rounded" required>
+            <option value="électricité">Électricité</option>
+            <option value="plomberie">Plomberie</option>
+            <option value="peinture">Peinture</option>
+            <option value="renovation">Rénovation d'intérieur</option>
+            <option value="isolation_thermique">Isolation thermique</option>
+            <option value="isolation_phonique">Isolation phonique</option>
+            <option value="terrasse">Terrasse</option>
+            <option value="travaux_extérieurs">Travaux extérieurs</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label id="work-month" class="block mb-2 font-semibold">Mois de début des travaux</label>
+          <select name="startMonth" class="w-full border px-4 py-2 rounded" required>
+            <option>Janvier</option>
+            <option>Février</option>
+            <option>Mars</option>
+            <option>Avril</option>
+            <option>Mai</option>
+            <option>Juin</option>
+            <option>Juillet</option>
+            <option>Août</option>
+            <option>Septembre</option>
+            <option>Octobre</option>
+            <option>Novembre</option>
+            <option>Décembre</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label id="label-message" class="block mb-2 font-semibold">Message</label>
+          <textarea name="message" class="w-full border px-4 py-2 rounded" rows="4"
+            placeholder="Comment pouvons-nous vous aider ?" required></textarea>
+        </div>
+
+        <input type="hidden" name="_next" value="https://constructionpro.fr/merci.html" />
+        <input type="hidden" name="_subject" value="Nouveau message depuis ConstructionPRO.fr" />
+
+        <button id="send-button" type="submit"
+          class="bg-yellow-600 text-white px-6 py-2 rounded hover:bg-yellow-700">Envoyer</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="bg-gray-800 text-white text-center p-6">
+    <div class="container mx-auto space-y-4">
+      <div>
+        <h4 class="text-lg font-semibold mb-2">Coordonnées</h4>
+        <p><a href="tel:+33781049909" class="hover:underline">📞 07 81 04 99 09</a></p>
+        <p><a href="https://wa.me/33781049909" class="hover:underline" target="_blank">💬 WhatsApp</a></p>
+        <p><a href="mailto:constructionprofr@gmail.com" class="hover:underline">✉️ constructionprofr@gmail.com</a></p>
+        <p>📍 33 Rte de Versailles, 78560 Le Port-Marly</p>
+        <div class="mt-4">
+          <iframe class="w-full h-64 rounded shadow" frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2624.136963821457!2d2.1031506!3d48.8746655!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6639c58babd8f%3A0x1c248e3ee09e1685!2sconstruction%20pro%20fr!5e0!3m2!1sen!2sfr!4v1752939322660!5m2!1sen!2sfr&output=embed"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      <div class="mt-4 text-sm">
+        &copy; <span id="year"></span> ConstructionPRO.fr. Tous droits réservés.
+      </div>
+      <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+      </script>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        title: "ConstructionPRO.fr",
+        slogan: "Your Reliable Partner in Construction",
+        services: "Our Services",
+        renovation: "Communications",
+        renovationDesc: "Electricity, plumbing and network installations.",
+        construction: "Interiors",
+        constructionDesc: "Kitchen, bathroom, and bedroom renovation: electrical work, plumbing, and finishing.",
+        maintenance: "Insulation",
+        maintenanceDesc: "Window replacement, roof insulation, thermal and sound solutions.",
+        groundworks: "Exterior Works",
+        groundworksDesc: "Foundations, soil preparation, terraces and groundwork.",
+        contact: "Contact Us",
+        name: "Name",
+        email: "Email",
+        workType: "Type of work",
+        startMonth: "Month of start of work",
+        message: "Message",
+        send: "Send"
+      },
+      fr: {
+        title: "ConstructionPRO.fr",
+        slogan: "Votre partenaire fiable en construction",
+        services: "Nos Services",
+        renovation: "Communications",
+        renovationDesc: "Électricité, plomberie et réseaux.",
+        construction: "Intérieurs",
+        constructionDesc: "Rénovation de cuisine, salle de bain et chambre : électricité, plomberie et finitions.",
+        maintenance: "Isolation",
+        maintenanceDesc: "Remplacement de fenêtres, isolation de toiture, solutions thermiques et phoniques.",
+        groundworks: "Travaux d'extérieur",
+        groundworksDesc: "Fondations, préparation du sol, terrasses et aménagements extérieurs.",
+        contact: "Contactez-nous",
+        name: "Nom",
+        email: "Courriel",
+        workType: "Type des travaux",
+        startMonth: "Mois de début des travaux",
+        message: "Message",
+        send: "Envoyer"
+      },
+      ru: {
+        title: "ConstructionPRO.fr",
+        slogan: "Ваш надежный партнёр в строительстве",
+        services: "Наши Услуги",
+        renovation: "Коммуникации",
+        renovationDesc: "Электрика, сантехника и сети.",
+        construction: "Интерьеры",
+        constructionDesc: "Ремонт кухни, ванной и спальни: электрика, сантехника и отделка.",
+        maintenance: "Изоляция",
+        maintenanceDesc: "Замена окон, утепление крыши, тепло- и шумоизоляция.",
+        groundworks: "Наружные работы",
+        groundworksDesc: "Фундаменты, подготовка почвы, террасы и земляные работы.",
+        contact: "Свяжитесь с нами",
+        name: "Имя",
+        email: "Электронная почта",
+        workType: "Тип работ",
+        startMonth: "Месяц начала работы",
+        message: "Сообщение",
+        send: "Отправить"
+      }
+    };
+
+    function setLang(lang) {
+      const t = translations[lang];
+      document.getElementById("title").textContent = t.title;
+      document.getElementById("slogan").textContent = t.slogan;
+      document.getElementById("services-title").textContent = t.services;
+      document.getElementById("construction-title").textContent = t.construction;
+      document.getElementById("construction-desc").textContent = t.constructionDesc;
+      document.getElementById("maintenance-title").textContent = t.maintenance;
+      document.getElementById("maintenance-desc").textContent = t.maintenanceDesc;
+      document.getElementById("groundworks-title").textContent = t.groundworks;
+      document.getElementById("groundworks-desc").textContent = t.groundworksDesc;
+      document.getElementById("contact-title").textContent = t.contact;
+      document.getElementById("label-name").textContent = t.name;
+      document.getElementById("label-email").textContent = t.email;
+      document.getElementById("work-type").textContent = t.workType;
+      document.getElementById("work-month").textContent = t.startMonth;
+      document.getElementById("label-message").textContent = t.message;
+      document.getElementById("send-button").textContent = t.send;
+    }
+
+    // Highlight current nav link
+    const navLinks = document.querySelectorAll("nav a");
+    const sections = document.querySelectorAll("section");
+
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const link = document.querySelector(`[data-link='${entry.target.id}']`);
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove("text-yellow-300", "font-bold"));
+          if (link) link.classList.add("text-yellow-300", "font-bold");
+        }
+      });
+    }, { threshold: 0.6 });
+
+    sections.forEach(section => sectionObserver.observe(section));
+
+    // Animate service cards on scroll
+    const fadeUps = document.querySelectorAll('.fade-up');
+    const fadeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('appear');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    fadeUps.forEach(el => fadeObserver.observe(el));
+  </script>
+</body>
+
+</html>
