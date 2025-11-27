@@ -3,14 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Nos Préstations</title>
+    <title>Nos Prestations</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         .carousel-container {
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             margin: auto;
         }
 
@@ -20,46 +21,44 @@
         }
 
         .carousel-item {
-            flex-shrink: 0;
             width: 100%;
+            flex-shrink: 0;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        video,
-        img {
+        .carousel-media {
             max-height: 80vh;
-            width: auto;
             max-width: 100%;
-            object-fit: contain;
+            width: auto;
             border-radius: 8px;
-        }
-
-        .carousel-controls {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
+            object-fit: contain;
         }
     </style>
 </head>
 
 <body class="min-h-screen flex items-center justify-center bg-gray-100">
+
+    <!-- Back Button -->
     <a href="index.html"
         class="absolute top-4 left-4 bg-white bg-opacity-80 text-black px-4 py-2 rounded shadow hover:bg-opacity-100 transition">
         ⬅ Retour
     </a>
 
-    <div class="carousel-container">
+    <!-- Carousel -->
+    <div class="carousel-container mt-10">
         <div id="carousel-slides" class="carousel-track"></div>
 
-        <!-- Arrow Buttons -->
-        <button id="prev"
-            class="absolute top-1/2 left-0 transform -translate-y-1/2 px-3 py-2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-r-md">
+        <!-- Prev Button -->
+        <button id="prev" class="absolute top-1/2 left-0 -translate-y-1/2 px-3 py-2 
+                   bg-white bg-opacity-80 hover:bg-opacity-100 rounded-r-md shadow z-10">
             &#8592;
         </button>
-        <button id="next"
-            class="absolute top-1/2 right-0 transform -translate-y-1/2 px-3 py-2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-l-md">
+
+        <!-- Next Button -->
+        <button id="next" class="absolute top-1/2 right-0 -translate-y-1/2 px-3 py-2 
+                   bg-white bg-opacity-80 hover:bg-opacity-100 rounded-l-md shadow z-10">
             &#8594;
         </button>
     </div>
@@ -103,56 +102,61 @@
             ]
         };
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const setNum = urlParams.get('set') || '1';
+        const params = new URLSearchParams(window.location.search);
+        const setNum = params.get("set") || "1";
         const mediaItems = sets[setNum] || sets[1];
 
-        const slides = document.getElementById('carousel-slides');
+        const slides = document.getElementById("carousel-slides");
+
         slides.innerHTML = mediaItems.map(src => {
-            const isVideo = src.toLowerCase().endsWith('.mp4');
+            const isVideo = src.toLowerCase().endsWith(".mp4");
             return `
-        <div class="carousel-item">
-          ${isVideo
-                    ? `<video autoplay muted loop playsinline>
-                 <source src="${src}" type="video/mp4">
-                 Your browser does not support the video tag.
-               </video>`
-                    : `<img src="${src}" alt="media">`}
-        </div>`;
-        }).join('');
+                <div class="carousel-item">
+                    ${isVideo
+                    ? `<video class="carousel-media" autoplay muted loop playsinline>
+                                <source src="${src}" type="video/mp4" />
+                                Your browser does not support the video tag.
+                           </video>`
+                    : `<img src="${src}" class="carousel-media" alt="Media">`
+                }
+                </div>`;
+        }).join("");
 
+        // Carousel logic
         let index = 0;
-        const track = document.querySelector('.carousel-track');
-        function updateCarousel() {
-            track.style.transform = `translateX(-${index * 100}%)`;
-        }
+        const track = document.querySelector(".carousel-track");
 
-        function nextSlide() {
+        const updateCarousel = () => {
+            track.style.transform = `translateX(-${index * 100}%)`;
+        };
+
+        const nextSlide = () => {
             index = (index + 1) % mediaItems.length;
             updateCarousel();
-        }
+        };
 
-        function prevSlide() {
+        const prevSlide = () => {
             index = (index - 1 + mediaItems.length) % mediaItems.length;
             updateCarousel();
-        }
+        };
 
-        document.getElementById('next').addEventListener('click', nextSlide);
-        document.getElementById('prev').addEventListener('click', prevSlide);
+        document.getElementById("next").addEventListener("click", nextSlide);
+        document.getElementById("prev").addEventListener("click", prevSlide);
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') nextSlide();
-            if (e.key === 'ArrowLeft') prevSlide();
+        // Keyboard control
+        document.addEventListener("keydown", e => {
+            if (e.key === "ArrowRight") nextSlide();
+            if (e.key === "ArrowLeft") prevSlide();
         });
 
-        // Swipe support
+        // Touch swipe
         let startX = 0;
-        slides.addEventListener('touchstart', (e) => {
+
+        slides.addEventListener("touchstart", e => {
             startX = e.touches[0].clientX;
         });
 
-        slides.addEventListener('touchend', (e) => {
+        slides.addEventListener("touchend", e => {
             const diff = startX - e.changedTouches[0].clientX;
             if (Math.abs(diff) > 50) {
                 diff > 0 ? nextSlide() : prevSlide();
